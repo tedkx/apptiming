@@ -10,6 +10,7 @@ var user = {
 };
 
 var sql = {
+  indexSelect: "SELECT unit_name AS unit,avg(EXTRACT(EPOCH FROM (end_time - start_time)) * 1000) AS \"average\" FROM timings GROUP BY unit_name",
   unitSelect: "SELECT app_id,unit_name,key,start_time,end_time,EXTRACT(EPOCH FROM (end_time - start_time)) * 1000 AS duration FROM timings" +
     " WHERE unit_name = $1 ORDER BY app_id,unit_name,start_time DESC",
   insert: "WITH inserted AS (INSERT INTO timings (app_id, unit_name, key, start_time) VALUES ($1::integer, $2, $3, now()) RETURNING key,start_time) " +
@@ -45,11 +46,11 @@ var handleQueryError = function(error, response, done) {
 // Index
 router.get('/', function(req, res, next) {
   pg.connect(connectionString, function(connectError, client, done) {
-    client.query("SELECT DISTINCT unit_name FROM timings", function(error, result) {
+    client.query(sql.indexSelect, function(error, result) {
       done();
       res.render('index', { 
         title: 'Timings' + (req.params.unitname ? ' for ' + req.params.unitname : ''), 
-        data: result ? result.rows.map(function(o) { return o.unit_name; }) : null, 
+        data: result ? result.rows : null, 
         baseurl: 'http://localhost:3000/unit/',
         error: error 
       });
@@ -94,7 +95,6 @@ router.post('/api/v1/time/:key*?', function(req, res, next) {
         handleQueryError(updateError1, res, done);
       } else if(result1.rowCount == 0) {
         //treat key as unitname and retry
-        console.log('trying unitname');
         client.query(sql.notFoundUpdateSql, [user.appId,req.params.key], function(updateError2, result2) {
           if(updateError2) {
             handleQueryError(updateError2, res, done);

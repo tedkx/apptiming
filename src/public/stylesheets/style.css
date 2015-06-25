@@ -5,6 +5,8 @@ body {
 
 a { color: #00B7FF; }
 
+#unitswrap a { display:block; }
+
 .timing-header,.timing { overflow:hidden; }
 .timing-header { font-weight:bold; }
 .timing-header div,.timing div { float:left; }

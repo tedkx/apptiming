@@ -7,9 +7,9 @@ block content
     div#error= error
   else
     div#unitswrap
-    if data.length == 0
-      span No units found
-    else
-      -for (var i = 0; i < data.length; ++i) {
-        a(href=baseurl + data[i])= data[i]
-      - }
+      if data.length == 0
+        span No units found
+      else
+        -for (var i = 0; i < data.length; ++i) {
+          a(href=baseurl + data[i].unit)= data[i].unit + ' ' + (data[i].average)
+        - }
