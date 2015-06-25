@@ -3,6 +3,18 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-a {
-  color: #00B7FF;
-}
+a { color: #00B7FF; }
+
+.timing-header,.timing { overflow:hidden; }
+.timing-header { font-weight:bold; }
+.timing-header div,.timing div { float:left; }
+div.timing-app { width:50px; }
+div.timing-name { width:85px; }
+div.timing-key { width:85px; }
+div.timing-duration { width:100px;font-weight: bold;color:#5A5 }
+.timing-header div.timing-duration { color:#000; }
+div.timing-starttime { width:150px; }
+div.timing-endtime { width:150px; }
+.clearer { clear:both; }
+
+#error {color:#D55; }

@@ -1,0 +1,30 @@
+extends layout
+
+block content
+  h1= title
+  
+  if error
+    div#error= error
+  else
+    div#timingswrap
+    if data.length == 0
+      span None found
+    else
+      div.timing-header
+        div.timing-app App
+        div.timing-name Name
+        div.timing-key Key
+        div.timing-starttime Start Time
+        div.timing-endtime End Time
+        div.timing-duration Duration
+        div.clearer
+      -for (var i = 0; i < data.length; ++i) {
+        div.timing
+          div.timing-app= data[i].app_id
+          div.timing-name= data[i].unit_name
+          div.timing-key= data[i].key
+          div.timing-starttime= data[i].start_time
+          div.timing-endtime= data[i].end_time
+          div.timing-duration= data[i].duration
+          div.clearer
+      - }
