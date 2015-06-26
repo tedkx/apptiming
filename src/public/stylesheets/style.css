@@ -5,14 +5,16 @@ body {
 
 a { color: #00B7FF; }
 
-#unitswrap a { display:block; }
+#unitswrap a { display:block;font-size:16px;color:#213A71;width:350px; }
+#unitswrap a span { float:right; text-decoration:none; font-weight:bold;}
+#unitswrap a:hover { color:#617AB1; }
 
 .timing-header,.timing { overflow:hidden; }
 .timing-header { font-weight:bold; }
 .timing-header div,.timing div { float:left; }
 div.timing-app { width:50px; }
-div.timing-name { width:85px; }
-div.timing-key { width:85px; }
+div.timing-name { width:180px; }
+div.timing-key { width:105px; }
 div.timing-duration { width:100px;font-weight: bold;color:#5A5 }
 .timing-header div.timing-duration { color:#000; }
 div.timing-starttime { width:150px; }

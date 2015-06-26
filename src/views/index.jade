@@ -11,5 +11,6 @@ block content
         span No units found
       else
         -for (var i = 0; i < data.length; ++i) {
-          a(href=baseurl + data[i].unit)= data[i].unit + ' ' + (data[i].average)
+          a(href=baseurl + data[i].unit)= data[i].unit
+            span= (data[i].average) + ' ms'
         - }
