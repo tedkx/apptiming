@@ -13,7 +13,7 @@ var sql = {
   indexSelect: "SELECT t.unit,t.app_id,a.name AS app_name,t.average FROM ( " + 
       "SELECT unit_name AS unit,app_id,to_char(avg(EXTRACT(EPOCH FROM (end_time - start_time)) * 1000), 'FM99999')::int AS average FROM timings " +
       "GROUP BY unit_name,app_id ORDER BY app_id,unit_name) t " +
-    "INNER JOIN apps a ON a.app_id = t.app_id ORDER BY t.app_id ASC,t.average DESC",
+    "INNER JOIN apps a ON a.app_id = t.app_id ORDER BY t.app_id DESC,t.average DESC",
   unitSelect: "SELECT app_id,unit_name,key,start_time,end_time,EXTRACT(EPOCH FROM (end_time - start_time)) * 1000 AS duration FROM timings" +
     " WHERE unit_name = $1 ORDER BY app_id,unit_name,start_time DESC",
   insert: "WITH inserted AS (INSERT INTO timings (app_id, unit_name, key, start_time) VALUES ($1::integer, $2, $3, now()) RETURNING key,start_time) " +
