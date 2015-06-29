@@ -6,11 +6,15 @@ block content
   if error
     div#error= error
   else
-    div#unitswrap
+    div#timingswrap
       if data.length == 0
-        span No units found
+        span No apps found
       else
-        -for (var i = 0; i < data.length; ++i) {
-          a(href=baseurl + data[i].unit)= data[i].unit
-            span= (data[i].average) + ' ms'
+        -for (var i = 0; i < data.length; i++) {
+          h2(id=data[i].app_id)= data[i].name
+          div.unitswrap(for=data[i].app_id)
+          -for (var j = 0; j < data[i].units.length; j++) {
+            a(href=baseurl + data[i].units[j].unit)= data[i].units[j].unit
+              span= (data[i].units[j].average) + ' ms'
+          - }
         - }
